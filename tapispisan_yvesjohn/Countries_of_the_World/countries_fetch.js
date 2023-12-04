@@ -3,18 +3,15 @@ const submit = document.querySelector("button");
 const getData = () => {
     const txtBox = document.querySelector("input").value;
 
-    // Object to store data
     const countryData = {
         countryRegion: "",
         countryInfo: "",
         regionData: ""
     };
 
-    // First request to get the country details
     fetch(`https://restcountries.com/v3.1/name/${txtBox}`)
         .then(response => response.json())
         .then(data => {
-            // Check if the country data is available
             if (data.length > 0) {
                 countryData.countryRegion = data[0]?.region;
                 countryData.countryInfo = {
@@ -29,10 +26,8 @@ const getData = () => {
                 };
                 let region = countryData.countryRegion
                 let rgnAPI = `https://restcountries.com/v3.1/region/${region}`
-                // Second request to get the region based on the country's region
                 return fetch(rgnAPI);
             } else {
-                // Country doesn't exist
                 throw new Error("Country not found");
             }
         })
@@ -40,7 +35,6 @@ const getData = () => {
         .then(regionData => {
             countryData.regionData = regionData;
 
-            // Display the result
             document.querySelector(".result").innerHTML = `
                 <h3>Country Information</h3>
                 <img src="${countryData.countryInfo.flag}"/>
@@ -56,7 +50,6 @@ const getData = () => {
                 <p>Capital City: ${countryData.countryInfo.capital}</p>
                 <p>Region: ${countryData.countryInfo.region}</p>`;
 
-            // Display countries in the same region
             const countriesInRegionHTML = regionData.map(country => `
                 <div>
                     <img 
