@@ -500,6 +500,19 @@
   margin: 80px;
 }
 
+.countries{
+  display: flex;
+  justify-content: center;
+}
+
+.country-btn{
+  border: none;
+  border-radius: 10px;
+  color: #1d1d1f;
+  padding: 14px 28px;
+  font-size: 16px;
+  background-color: #96ccba;
+}
 
 .search, .result{
   display: flex;
