@@ -73,3 +73,8 @@ function getCommentDate(comment) {
     }
     return "";
 }
+
+function openFolder(){
+    const folderPath = 'Countries_of_the_World/countries_of_the_world.html'
+    window.location.href = folderPath;
+}
