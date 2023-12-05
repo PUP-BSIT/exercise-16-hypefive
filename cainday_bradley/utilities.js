@@ -8,7 +8,7 @@ const API_URL = "https://restcountries.com/v3.1";
 const countryData = {
   countryRegion: "",
   countryInfo: "",
-  regionData: ""
+  regionData: "",
 };
 
 const fetchData = async (endpoint) => {
@@ -29,22 +29,27 @@ const displayCountryInfo = () => {
     <p>Population: ${countryData.countryInfo.population}</p>
     <p>Area: ${countryData.countryInfo.area}</p>
     <p>Currencies: ${Object.keys(countryData.countryInfo.currencies)
-      .map(currency => {
+      .map((currency) => {
         const curr = countryData.countryInfo.currencies[currency];
         return `${curr.name} (${curr.symbol})`;
-      }).join(', ')}</p>
+      })
+      .join(", ")}</p>
     <p>Capital City: ${countryData.countryInfo.capital}</p>
     <p>Region: ${countryData.countryInfo.region}</p>`;
 };
 
 const displayRegionCountries = () => {
-  const countriesInRegionHTML = countryData.regionData.map(country => `
+  const countriesInRegionHTML = countryData.regionData
+    .map(
+      (country) => `
     <div>
       <img 
         src="${country.flags?.png}" 
         alt="${country.name.common} Flag" />
       <p>${country.name.common}</p>
-    </div>`).join('');
+    </div>`
+    )
+    .join("");
 
   regionCountries.innerHTML = `
     <h3 class="region-title">Countries in the Same Region</h3>
@@ -77,12 +82,14 @@ const getData = async () => {
         currencies: country.currencies,
         capital: country.capital[0],
         region: country.region,
-        flag: country.flags.png
+        flag: country.flags.png,
       };
 
       displayCountryInfo();
 
-      const regionDataArray = await fetchData(`region/${countryData.countryRegion}`);
+      const regionDataArray = await fetchData(
+        `region/${countryData.countryRegion}`
+      );
 
       countryData.regionData = regionDataArray;
 
